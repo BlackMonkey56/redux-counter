@@ -1,30 +1,25 @@
-import * as types from '../actions/ActionTypes';
+import number from './number';
+import color from './color';
 
-const initialState = {
-    color: 'black',
-    number: 0
-};
+import {combineReducers} from 'redux';
 
-function counter(state = initialState, action) {
-    switch(action.type){
-        case types.INCREMENT:
-            return{
-                ...state,
-                number: state.number + 1
-            };
-        case types.DECREMENT:
-            return{
-                ...state,
-                number: state.number - 1
-            };
-        case types.SET_COLOR:
-            return{
-                ...state,
-                color: action.color
-            };
-        default:
-            return state;
+/*서브 리듀서들을 하나로 합칩니다.
+combineReducers를 실행하고 나면, 나중에 store 형태를
+파라미터로 전달한 객체 모양대로 만듭니다.
+지금은 다음과 같이 만듭니다.
+{
+    numberData: {
+        number: 0
+    },
+    colorData: {
+        color: 'black'
     }
-};
+}
+*/
 
-export default counter;
+const reducers = combineReducers({
+    numberData: number,
+    colorData: color
+});
+
+export default reducers;
